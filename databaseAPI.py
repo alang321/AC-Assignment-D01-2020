@@ -2,7 +2,7 @@ import gspread
 import pandas as pd
 from oauth2client.service_account import ServiceAccountCredentials
 
-def getdata(sheetname):
+def getdatafromsheet(sheetname):
     # define the scope
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
@@ -24,6 +24,3 @@ def getdata(sheetname):
 
     # view the top records
     return records_df
-
-
-print(getdata('Aircraft Reference Database'))
