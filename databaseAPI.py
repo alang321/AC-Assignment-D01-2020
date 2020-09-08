@@ -22,5 +22,7 @@ def getdatafromsheet(sheetname):
     # convert the json to dataframe
     records_df = pd.DataFrame.from_dict(records_data)
 
-    # view the top records
+    #remove the own row
+    records_df = records_df[records_df['Aircraft Name'] != 'Own']
+
     return records_df
