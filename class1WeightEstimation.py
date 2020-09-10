@@ -17,7 +17,7 @@ p_0 =101325 #Pa
 frac_resf = 0.05 #reserve fuel
 frac_tfo = 0.01 #fraction trpped fuel and oil of total fuel
 A = 8.45 #7-10 calculated by taking average from database
-c_j = 0.58 * (0.45359 * 0.2248)/(3600) #0.5 - 0.9 * 0.45359 /3600 * 0.2248, for conversion
+c_j = 0.582 * (0.45359 * 0.2248)/(3600) #0.5 - 0.9 * 0.45359 /3600 * 0.2248, for conversion
 
 oswald_fact = 0.8 #0.7-0.85 Oswald factor
 C_D0 = 0.018 #0.014-0.020
@@ -48,7 +48,7 @@ def class1weight(rangemass, Mach_cruise, h_cruise):
         frac_usedf = fuelfracttransport(range, v_cruise)
 
         # Step 3: Calculate MTOW
-        MTOW = (W_pl + reg_b) / (1 - (reg_a + frac_usedf * (1 + frac_resf + frac_tfo)))  # N  (1 + frac_resf + frac_tfo) accring to (3.11) from Aircraft Design, Raymer
+        MTOW = (W_pl + reg_b) / (1 - (reg_a + frac_usedf * (1 + frac_tfo)))  # N  (1 + frac_resf + frac_tfo) accring to (3.11) from Aircraft Design, Raymer
 
         #check if largest mtow
         if MTOW > mtow_max:
@@ -83,9 +83,8 @@ def fuelfracttransport(range, v_cruise):
     LoverD2 = ((np.pi * A * oswald_fact * C_D0)**0.5) / (2 * C_D0)
     w98 = 1 / (np.exp((t_loiter * g_0 * c_j) / (LoverD2)))
 
-    M_ff = 0.99 * 0.99 * 0.995 * 0.98 * 0.99 * 0.992 * w54 * w98
+    M_ff = 0.99 * 0.99 * 0.995 * 0.98 * 0.99 * 0.992 * 0.965 * w54 * w98
     return 1 - M_ff
-
 
 
 #from requirements
