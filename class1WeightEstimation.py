@@ -17,7 +17,7 @@ p_0 =101325 #Pa
 frac_resf = 0.05 #reserve fuel
 frac_tfo = 0.01 #fraction trpped fuel and oil of total fuel
 A = 8.45 #7-10 calculated by taking average from database
-c_j = 0.58 * (0.45359 * 0.2248)/(3600) #0.5 - 0.9 * 0.45359 /3600 * 0.2248, for conversion
+c_j = 0.58 * (0.45359 * 0.2248)/(3600) #0.5 - 0.9 * 0.45359 /3600 * 0.2248, for conversion Bw2000/BW4000/Rolls Royce RB12
 
 oswald_fact = 0.8 #0.7-0.85 Oswald factor
 C_D0 = 0.018 #0.014-0.020
