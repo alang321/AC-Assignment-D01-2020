@@ -18,13 +18,27 @@ frac_resf = 0.05 #reserve fuel
 frac_tfo = 0.01 #fraction trpped fuel and oil of total fuel
 A = 8.45 #7-10 calculated by taking average from database
 c_j = 0.582 * (0.45359 * 0.2248)/(3600) #0.5 - 0.9 * 0.45359 /3600 * 0.2248, for conversion
-
 oswald_fact = 0.8 #0.7-0.85 Oswald factor
 C_D0 = 0.018 #0.014-0.020
 t_loiter = 1800 #s
 
+#from requirements
+#payload masses
+M_harm = 66000 #kg
+M_miss = 40000 #kg
+M_maxi = 18000 #kg
+M_ferr = 0 #kg
+#ranges
+R_harm = 4500 #km
+R_miss = 7500 #km
+R_maxi = 10500 #km
+R_ferr = 11000 #km
+
+Mach_cruise = 0.77
+h_cruise = 9449 #m
+
 #main function, rangemass should be of format (m, kg) [[range1, pl1], [range2, pl2]....]
-def class1weight(rangemass, Mach_cruise, h_cruise):
+def class1weight(rangemass):
     # General setup
     # calculations for atmosphere
     t, p, rho, a = atmospheredata(h_cruise) #K, Pa, kg/m^3, m/s
@@ -87,24 +101,10 @@ def fuelfracttransport(range, v_cruise):
     return 1 - M_ff
 
 
-#from requirements
-#payload masses
-M_harm = 66000 #kg
-M_miss = 40000 #kg
-M_maxi = 18000 #kg
-M_ferr = 0 #kg
-#ranges
-R_harm = 4500 #km
-R_miss = 7500 #km
-R_maxi = 10500 #km
-R_ferr = 11000 #km
-
-Mach_cruise = 0.77
-h_cruise = 9449 #m
-
+#create a list of missions and their corresponding payloads, so the most limiting one can be deduced
 rangemass = [[R_harm*1000, M_harm], [R_miss*1000, M_miss], [R_maxi*1000, M_maxi], [R_ferr*1000, M_ferr]]
 
-MTOW, OEW, missionindex = class1weight(rangemass, Mach_cruise, h_cruise)
+MTOW, OEW, missionindex = class1weight(rangemass)
 
 print("\nCLASS 1 WEIGHT ESTIMATION RESULTS \n")
 print("Most limiting mission with range of", (rangemass[missionindex][0]/1000), "[m] and", rangemass[missionindex][1], "[kg] of payload.")

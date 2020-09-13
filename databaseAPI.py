@@ -15,14 +15,11 @@ def getdatafromsheet(sheetname):
     sheet = client.open(sheetname)
 
     # get the first sheet of the Spreadsheet
-    sheet_instance = sheet.get_worksheet(0)
+    sheet_instance = sheet.worksheet('Pure Database for Python')
 
     records_data = sheet_instance.get_all_records()
 
     # convert the json to dataframe
     records_df = pd.DataFrame.from_dict(records_data)
-
-    #remove the own row
-    records_df = records_df[records_df['Aircraft Name'] != 'Own']
 
     return records_df
