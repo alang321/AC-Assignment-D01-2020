@@ -64,6 +64,10 @@ def class1weight(rangemass):
         # Step 3: Calculate MTOW
         MTOW = (W_pl + reg_b) / (1 - (reg_a + frac_usedf * (1 + frac_tfo)))  # N  (1 + frac_resf + frac_tfo) accring to (3.11) from Aircraft Design, Raymer
 
+        print(MTOW/g_0)
+        print(frac_usedf)
+        print()
+
         #check if largest mtow
         if MTOW > mtow_max:
             mtow_max_index = index
